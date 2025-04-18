@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Create Service Accounts") {
+            steps {
+                ansiblePlaybook credentialsId: 'ubuntu1',
+                                 disableHostKeyChecking: true,
+                                 installation: 'Ansible',
+                                 inventory: 'dev.inv',
+                                 playbook: 'playbook/service_accounts.yml'
+            }
+        }
+    }
+}
